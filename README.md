@@ -5,7 +5,7 @@ Notes/Exercises for learning Scala Language
 
 ## Neophyte's guide
 
-* From: danielwestheide.com/scala/neophytes.html
+* From: www.danielwestheide.com/scala/neophytes.html
 
 ## Play Framework
 
