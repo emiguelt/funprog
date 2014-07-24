@@ -1,4 +1,4 @@
 scalaLearning
 =============
 
-Notes/Exercices for learning Scala Language
+Notes/Exercises for learning Scala Language
