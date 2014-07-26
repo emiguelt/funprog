@@ -12,3 +12,4 @@ GET /hello controllers.Basic.hello
 GET /todo controllers.Basic.todo
 GET /hello/:name controllers.Basic.hello2(name: String)
 GET /hello3 controllers.Basic.hello2(name: String)
+GET /hello4 controllers.Basic.helloWithTemplate(name: String)

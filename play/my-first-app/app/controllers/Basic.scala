@@ -13,4 +13,8 @@ object Basic extends Controller{
   def hello2(name : String) = Action{
     Ok("Hello " + name)
   }
+  
+  def helloWithTemplate(name: String) = Action{
+    Ok(views.html.helloWithTemplate(name))
+  }
 }
