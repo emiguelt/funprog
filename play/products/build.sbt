@@ -10,5 +10,6 @@ libraryDependencies ++= Seq(
   jdbc,
   anorm,
   cache,
-  ws
+  ws,
+  "net.sf.barcode4j" % "barcode4j" % "2.0"
 )
