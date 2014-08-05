@@ -43,4 +43,47 @@ object _01_Option {
                                                   //> Name: name1
 	//will print nothing
 	UserRepository.findById(5).foreach(user => println("Name: " + user.firstName))
+	
+	//Mapping an option
+		
+	//flapMap
+	UserRepository.findById(2).map(_.gender)  //> res0: Option[Option[String]] = Some(Some(male))
+	UserRepository.findById(2).flatMap(_.gender)
+                                                  //> res1: Option[String] = Some(male)
+                                                  
+ //options works as lists
+ val names:List[Option[String]] = Some("Name1")::None::Some("Name2")::Nil
+                                                  //> names  : List[Option[String]] = List(Some(Name1), None, Some(Name2))
+ names.map(_.map(_.toUpperCase))                  //> res2: List[Option[String]] = List(Some(NAME1), None, Some(NAME2))
+ names.flatMap(_.map(_.toUpperCase))              //> res3: List[String] = List(NAME1, NAME2)
+ 
+ //filtering
+ UserRepository.findById(1).filter(_.age > 2)     //> res4: Option[part5._01_Option.User] = None
+ UserRepository.findById(2).filter(_.age > 2)     //> res5: Option[part5._01_Option.User] = None
+ UserRepository.findById(3).filter(_.age > 2)     //> res6: Option[part5._01_Option.User] = Some(User(3,name3,last3,3,Some(female
+                                                  //| )))
+ 
+ //comprehensions
+ for{
+ 	user <- UserRepository.findById(2)
+ 	gender <- user.gender
+ }yield gender                                    //> res7: Option[String] = Some(male)
+
+ for{
+ 	user <- UserRepository.findAll
+ 	gender <- user.gender
+ }yield gender                                    //> res8: Iterable[String] = List(male, female)
+
+ for{
+ 	User(_, _, _, _, Some(gender)) <- UserRepository.findAll
+ }yield gender                                    //> res9: Iterable[String] = List(male, female)
+ 
+ //chaining options
+ case class Resource(content: String)
+ val resInDir: Option[Resource] = None            //> resInDir  : Option[part5._01_Option.Resource] = None
+ val resInPath: Option[Resource] = Some(Resource("Content in path"))
+                                                  //> resInPath  : Option[part5._01_Option.Resource] = Some(Resource(Content in p
+                                                  //| ath))
+ val resource = resInDir orElse resInPath         //> resource  : Option[part5._01_Option.Resource] = Some(Resource(Content in pa
+                                                  //| th))
 }
