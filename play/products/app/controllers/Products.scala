@@ -10,6 +10,7 @@ import models.Product
 object Products extends Controller {
   private val productForm: Form[Product] = Form(
     mapping(
+      "id" -> longNumber,
       "ean" -> longNumber.verifying("validation.ean.duplicate", Product.findByEan(_).isEmpty),
       "name" -> nonEmptyText, "description" -> nonEmptyText)(Product.apply)(Product.unapply))
 
@@ -26,8 +27,17 @@ object Products extends Controller {
       }.getOrElse(NotFound)
   }
 
+  //TODO, it does not work, fix it!
+  def editProduct(ean: Long) = Action {
+    implicit request =>
+      Product.findByEan(ean).map { product =>
+        Ok(views.html.products.editProduct(productForm))
+      }.getOrElse(NotFound)
+
+  }
+
   def save = Action { implicit request =>
-    
+
     var newForm = productForm.bindFromRequest()
     newForm.fold(
       hasErrors = { form =>
@@ -35,7 +45,7 @@ object Products extends Controller {
           ("error" -> Messages("validation.errors")))
       },
       success = { newProduct =>
-        Product.addProduct(newProduct)
+        Product.insert(newProduct)
         Redirect(routes.Products.show(newProduct.ean))
       })
 
