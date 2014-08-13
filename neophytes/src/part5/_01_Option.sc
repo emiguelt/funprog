@@ -63,7 +63,7 @@ object _01_Option {
  UserRepository.findById(3).filter(_.age > 2)     //> res6: Option[part5._01_Option.User] = Some(User(3,name3,last3,3,Some(female
                                                   //| )))
  
- //comprehensions
+ //For comprehensions
  for{
  	user <- UserRepository.findById(2)
  	gender <- user.gender

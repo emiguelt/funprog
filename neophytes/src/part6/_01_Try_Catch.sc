@@ -29,14 +29,14 @@ object _01_Try_Catch {
 
   inputStreamForUrl("http://www.google.com")      //> res5: scala.util.Try[scala.util.Try[scala.util.Try[java.io.InputStream]]] = 
                                                   //| Success(Success(Success(sun.net.www.protocol.http.HttpURLConnection$HttpInpu
-                                                  //| tStream@656de49c)))
+                                                  //| tStream@781f6226)))
   inputStreamForUrl("httpww.google.com")          //> res6: scala.util.Try[scala.util.Try[scala.util.Try[java.io.InputStream]]] = 
                                                   //| Failure(java.net.MalformedURLException: no protocol: httpww.google.com)
   def inputStreamForUrlFlat(url: String): Try[InputStream] = parseUrl(url).flatMap {
     u => Try(u.openConnection()).flatMap(conn => Try(conn.getInputStream()))
   }                                               //> inputStreamForUrlFlat: (url: String)scala.util.Try[java.io.InputStream]
   inputStreamForUrlFlat("http://www.google.com")  //> res7: scala.util.Try[java.io.InputStream] = Success(sun.net.www.protocol.htt
-                                                  //| p.HttpURLConnection$HttpInputStream@781f6226)
+                                                  //| p.HttpURLConnection$HttpInputStream@105e55ab)
   inputStreamForUrlFlat("httpww.google.com")      //> res8: scala.util.Try[java.io.InputStream] = Failure(java.net.MalformedURLEx
                                                   //| ception: no protocol: httpww.google.com)
 
@@ -53,7 +53,7 @@ object _01_Try_Catch {
   //prints nothing
   parseHttpUrl("https://www.url.com").foreach(println)
 
-  // comprehensions
+  //For comprehensions
   import scala.io.Source
 
   def getUrlContent(url: String): Try[Iterator[String]] =
@@ -76,17 +76,17 @@ object _01_Try_Catch {
     case Failure(ex) => println("Exception: " + ex)
   }                                               //> <!doctype html><html itemscope="" itemtype="http://schema.org/WebPage" lang
                                                   //| ="es-419"><head><meta content="/images/google_favicon_128.png" itemprop="im
-                                                  //| age"><title>Google</title><script>(function(){
-                                                  //| window.google={kEI:"8hXpU5yPEqrIsATDn4DIDw",getEI:function(a){for(var c;a&&
-                                                  //| (!a.getAttribute||!(c=a.getAttribute("eid")));)a=a.parentNode;return c||goo
-                                                  //| gle.kEI},https:function(){return"https:"==window.location.protocol},kEXPI:"
-                                                  //| 4791,17259,4000116,4003510,4007661,4008142,4009033,4010806,4010858,4010899,
-                                                  //| 4011228,4011258,4011679,4012373,4012504,4013414,4013591,4013723,4013787,401
-                                                  //| 3823,4013967,4013979,4014016,4014431,4014515,4014636,4014805,4014991,401523
-                                                  //| 4,4015266,4015550,4015587,4015772,4016013,4016127,4016309,4016372,4016487,4
-                                                  //| 016824,4016938,4016976,4017204,4017285,4017578,4017595,4017639,4017658,4017
-                                                  //| 659,4017694,4017818,4017894,4017981,4017982,4018019,4018106,4018126,4018181
-                                                  //| ,4018251,4018416,4018519,4018544,4018569,4018638,40
+                                                  //| age"><title>Google</title><script>(function(){window.google={kEI:'k7XrU5nMK
+                                                  //| 5HgsASfuYH4Aw',kEXPI:'4791,17259,4000116,4007661,4008142,4009033,4010073,40
+                                                  //| 10806,4010858,4010899,4011228,4011258,4011679,4012373,4012504,4013414,40135
+                                                  //| 91,4013723,4013823,4013967,4013979,4014016,4014431,4014515,4014636,4014805,
+                                                  //| 4014991,4015234,4015266,4015550,4015587,4015772,4016127,4016309,4016373,401
+                                                  //| 6487,4016824,4016976,4017204,4017285,4017595,4017639,4017658,4017659,401769
+                                                  //| 4,4017818,4017894,4017981,4018106,4018126,4018251,4018411,4018519,4018544,4
+                                                  //| 018569,4018638,4018914,4018923,4018932,4019014,4019018,4019084,4019142,4019
+                                                  //| 191,4019207,4019423,4019438,4019479,4019481,4019483,4019494,4019564,4019590
+                                                  //| ,4019664,4019684,4019789,4019800,4019801,4019827,4019850,4019856,4019875,40
+                                                  //| 19888,4020014,4020038,4
                                                   //| Output exceeds cutoff limit.
 
   //recover
