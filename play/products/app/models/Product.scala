@@ -104,9 +104,12 @@ object Product {
   def findByEan(ean: Long): Option[Product] = DB.withConnection {
     implicit connection =>
       println("EAN: " + ean)
-      val sql = SQL("select * from products where ean = {ean}")
+      val sql = SQL("select * from products where ean = " + ean)
       //fix that
-      Some(sql.as(productsParser).head)
+      sql.as(productsParser) match {
+        case head :: _ => Some(head)
+        case _ => None
+      }
   }
 
 }
