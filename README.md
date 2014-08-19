@@ -10,7 +10,7 @@ Notes/Exercises for learning Scala Language
 ## Play Framework
 
 * From official documentation at www.playframework.com
-`
+
 ### Play for Scala (book) - Notes about
 * There is no enough information where to add functions/features to the example used along the book
 * where to put the Global object? At the default package (found in playframework online documentation, not in book)
