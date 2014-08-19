@@ -33,14 +33,14 @@ object CapuccinoMaker {
 
   def frothMilk(milk: Milk): Future[FrothedMilk] = Future {
 	  process("froth milk", 
-			  Unit => Right(), 
-			  Unit => s"frothed $milk")
+	  Unit => Right(), 
+	  Unit => s"frothed $milk")
   }
   
   def brew(groundCoffe: GroundCoffee, headWater: Water): Future[Espresso] = Future {
 	  process("brew", 
-			  Unit => Right(), 
-			  Unit => "espresso")
+	  Unit => Right(), 
+	  Unit => "espresso")
   }
 
   private def process[T](name: String, cond: Unit => Either[Exception,Unit], build: Unit => T): T = {
