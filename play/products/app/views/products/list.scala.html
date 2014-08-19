@@ -1,4 +1,4 @@
-@(products : List[Product])(implicit flash: Flash, lang: Lang)
+@(products : Iterable[Product])(implicit flash: Flash, lang: Lang)
 @main(Messages("application.name")){
 
 <dl class="products">

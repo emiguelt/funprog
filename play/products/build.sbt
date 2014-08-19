@@ -8,8 +8,8 @@ scalaVersion := "2.11.1"
 
 libraryDependencies ++= Seq(
   jdbc,
-  anorm,
   cache,
   ws,
-  "net.sf.barcode4j" % "barcode4j" % "2.0"
+  "net.sf.barcode4j" % "barcode4j" % "2.0",
+  "org.squeryl" % "squeryl_2.11" % "0.9.5-7"
 )
