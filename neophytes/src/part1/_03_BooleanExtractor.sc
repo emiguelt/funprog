@@ -24,10 +24,10 @@ object _02_MultipleExtractor {
 	def doMatch(user: User) = user match{
 		case freeuser @ premiumCandidate() => "Start spam program"
 		case _ => "Send regular newsletter"
-	}                                         //> doMatch: (user: part1._02_MultipleExtractor.User)String
+	}
 	
-	doMatch(new FreeUser("Miguel", 1, 0.5d))  //> res0: String = Send regular newsletter
-	doMatch(new FreeUser("Miguel", 1, 0.8d))  //> res1: String = Start spam program
-	doMatch(new PremiumUser("Miguel", 1))     //> res2: String = Send regular newsletter
+	doMatch(new FreeUser("Miguel", 1, 0.5d))
+	doMatch(new FreeUser("Miguel", 1, 0.8d))
+	doMatch(new PremiumUser("Miguel", 1))
 	
 }
