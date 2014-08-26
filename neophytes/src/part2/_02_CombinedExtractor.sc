@@ -12,10 +12,10 @@ object _02_CombinedExtractor {
   def greet(fullName: String) = fullName match{
   	case Names(lastname, firstname, _*) => "Hello " + firstname + " " + lastname
   	case _ => "Sorry, we need at least 2 name values"
-  }                                               //> greet: (fullName: String)String
+  }
   
   //Testing
-  greet("Edwin")                                  //> res0: String = Sorry, we need at least 2 name values
-  greet("Edwin Miguel")                           //> res1: String = Hello Edwin Miguel
-  greet("Edwin Miguel Test")                      //> res2: String = Hello Edwin Test
+  greet("Edwin")
+  greet("Edwin Miguel")
+  greet("Edwin Miguel Test")
 }

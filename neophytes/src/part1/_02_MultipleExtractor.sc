@@ -20,10 +20,10 @@ object _02_MultipleExtractor {
 	def doMatch(user: User) = user match{
 		case FreeUser(name, _, p) => if(p>0.7d) "Hello my friend " + name else "Hello " + name
 		case PremiumUser(name, _) => "Welcome back dear " + name
-	}                                         //> doMatch: (user: part1._02_MultipleExtractor.User)String
+	}
 	
-	doMatch(new FreeUser("Miguel", 1, 0.5d))  //> res0: String = Hello Miguel
-	doMatch(new FreeUser("Miguel", 1, 0.8d))  //> res1: String = Hello my friend Miguel
-	doMatch(new PremiumUser("Miguel", 1))     //> res2: String = Welcome back dear Miguel
+	doMatch(new FreeUser("Miguel", 1, 0.5d))
+	doMatch(new FreeUser("Miguel", 1, 0.8d))
+	doMatch(new PremiumUser("Miguel", 1))
 	
 }

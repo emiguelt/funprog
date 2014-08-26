@@ -17,13 +17,12 @@ object _01_SimpleExtractor {
   }
   
   //testing
-  FreeUser.unapply(new FreeUser("Miguel"))        //> res0: Option[String] = Some(Miguel)
+  FreeUser.unapply(new FreeUser("Miguel"))
   
   //testing in pattern matching
-  val user = new PremiumUser("Miguel")            //> user  : part1._01_SimpleExtractor.PremiumUser = part1._01_SimpleExtractor$Pr
-                                                  //| emiumUser@939b78e
+  val user = new PremiumUser("Miguel")
   user match{
   	case FreeUser(name) => "Hello" + name
   	case PremiumUser(name) => "Hello dear " + name;
-  }                                               //> res1: String = Hello dear Miguel
+  }
 }
