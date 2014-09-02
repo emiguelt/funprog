@@ -6,47 +6,55 @@ object _01_HigherOrderFunctions {
   type EmailFilter = Email => Boolean
 
   def newMailsForUser(mails: Set[Email], f: EmailFilter) = mails.filter(f)
-                                                  //> newMailsForUser: (mails: Set[part10._01_HigherOrderFunctions.Email], f: part
-                                                  //| 10._01_HigherOrderFunctions.EmailFilter)scala.collection.immutable.Set[part1
-                                                  //| 0._01_HigherOrderFunctions.Email]
 
-//filters
+  //filters
   val sentByOneOf: Set[String] => EmailFilter = senders => email => senders.contains(email.sender)
-                                                  //> sentByOneOf  : Set[String] => part10._01_HigherOrderFunctions.EmailFilter = 
-                                                  //| <function1>
   val notSentByOneOf: Set[String] => EmailFilter = senders => email => !senders.contains(email.sender)
-                                                  //> notSentByOneOf  : Set[String] => part10._01_HigherOrderFunctions.EmailFilter
-                                                  //|  = <function1>
   val minimumSize: Int => EmailFilter = n => email => email.text.size >= n
-                                                  //> minimumSize  : Int => part10._01_HigherOrderFunctions.EmailFilter = <functio
-                                                  //| n1>
   val maximumSize: Int => EmailFilter = n => email => email.text.size <= n
-                                                  //> maximumSize  : Int => part10._01_HigherOrderFunctions.EmailFilter = <functio
-                                                  //| n1>
 
   //test
   val mails = Set(Email(
     subject = "Abc",
     text = "cdef",
     sender = "hij@klm",
-    recipient = "nop@qrs"))                       //> mails  : scala.collection.immutable.Set[part10._01_HigherOrderFunctions.Emai
-                                                  //| l] = Set(Email(Abc,cdef,hij@klm,nop@qrs))
-    
+    recipient = "nop@qrs"))
+
   newMailsForUser(mails, sentByOneOf(Set("hij@klm")))
-                                                  //> res0: scala.collection.immutable.Set[part10._01_HigherOrderFunctions.Email] 
-                                                  //| = Set(Email(Abc,cdef,hij@klm,nop@qrs))
   newMailsForUser(mails, notSentByOneOf(Set("hij@klm")))
-                                                  //> res1: scala.collection.immutable.Set[part10._01_HigherOrderFunctions.Email] 
-                                                  //| = Set()
-  newMailsForUser(mails, notSentByOneOf(Set("hij@klm")))
-                                                  //> res2: scala.collection.immutable.Set[part10._01_HigherOrderFunctions.Email] 
-                                                  //| = Set()
-  newMailsForUser(mails, minimumSize(3))          //> res3: scala.collection.immutable.Set[part10._01_HigherOrderFunctions.Email] 
-                                                  //| = Set(Email(Abc,cdef,hij@klm,nop@qrs))
-  newMailsForUser(mails, minimumSize(5))          //> res4: scala.collection.immutable.Set[part10._01_HigherOrderFunctions.Email] 
-                                                  //| = Set()
-  newMailsForUser(mails, maximumSize(3))          //> res5: scala.collection.immutable.Set[part10._01_HigherOrderFunctions.Email]
-                                                  //|  = Set()
-  newMailsForUser(mails, maximumSize(5))          //> res6: scala.collection.immutable.Set[part10._01_HigherOrderFunctions.Email]
-                                                  //|  = Set(Email(Abc,cdef,hij@klm,nop@qrs))
+  newMailsForUser(mails, minimumSize(3))
+  newMailsForUser(mails, minimumSize(5))
+  newMailsForUser(mails, maximumSize(3))
+  newMailsForUser(mails, maximumSize(5))
+
+  // reusing functions
+  type SizeChecker = Int => Boolean
+  val sizeConstraint: SizeChecker => EmailFilter = f => email => f(email.text.size)
+  // val sizeConstraint: (SizeChecker => EmailFilter) = ( f => (email => f(email.text.size)))
+
+  val minimumSize2: Int => EmailFilter = n => sizeConstraint(_ >= n)
+  val maximumSize2: Int => EmailFilter = n => sizeConstraint(_ <= n)
+
+  newMailsForUser(mails, minimumSize2(3))
+  newMailsForUser(mails, minimumSize2(5))
+  newMailsForUser(mails, maximumSize2(3))
+  newMailsForUser(mails, maximumSize2(5))
+
+  // function composition
+  def complement[A](predicate: A => Boolean) = (a: A) => !predicate(a)
+  def notSentByOneOf2 = sentByOneOf andThen (complement(_))
+
+  newMailsForUser(mails, notSentByOneOf2(Set("hij@klm")))
+
+  //composing predicates
+  def any[A](predicates: (A => Boolean)*): A => Boolean =
+    a => predicates.exists(pred => pred(a))
+  def none[A](predicates: (A => Boolean)*): A => Boolean = complement(any(predicates: _*))
+  def every[A](predicates: (A => Boolean)*): A => Boolean = none(predicates.view.map(complement(_)): _*)
+  
+  var multifilter: EmailFilter = every(notSentByOneOf2(Set("hij@klm")), minimumSize2(3), maximumSize2(10))
+  newMailsForUser(mails, multifilter )
+  
+  multifilter = every(sentByOneOf(Set("hij@klm")), minimumSize2(3), maximumSize2(10))
+  newMailsForUser(mails, multifilter )
 }
