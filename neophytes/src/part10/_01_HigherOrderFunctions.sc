@@ -51,10 +51,19 @@ object _01_HigherOrderFunctions {
     a => predicates.exists(pred => pred(a))
   def none[A](predicates: (A => Boolean)*): A => Boolean = complement(any(predicates: _*))
   def every[A](predicates: (A => Boolean)*): A => Boolean = none(predicates.view.map(complement(_)): _*)
-  
+
   var multifilter: EmailFilter = every(notSentByOneOf2(Set("hij@klm")), minimumSize2(3), maximumSize2(10))
-  newMailsForUser(mails, multifilter )
-  
+  newMailsForUser(mails, multifilter)
+
   multifilter = every(sentByOneOf(Set("hij@klm")), minimumSize2(3), maximumSize2(10))
-  newMailsForUser(mails, multifilter )
+  newMailsForUser(mails, multifilter)
+
+  //Composing a transformation pipeline
+  val addMissingSubject = (email: Email) => if (email.text.isEmpty) email.copy(subject = "No subject") else email
+  val checkSpelling = (email: Email) => email.copy(email.text.replaceAll("your", "you are"))
+  val removeInappropriateLanguage = (email: Email) => email.copy(email.text.replaceAll("xxx", "*Censored*"))
+  val addAdFooter = (email: Email) => email.copy(email.text + "\n Sent by Awesome email service")
+
+  val pipeline = Function.chain(Seq(addMissingSubject, checkSpelling, removeInappropriateLanguage, addAdFooter))
+  pipeline(mails.head)
 }
