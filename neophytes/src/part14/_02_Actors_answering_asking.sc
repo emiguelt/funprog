@@ -1,6 +1,8 @@
 package part14
 
-object _02_Actors_answering {
+import scala.actors.Future
+
+object _02_Actors_answering_asking {
   import akka.actor.Actor
   import akka.actor.ActorSystem
   import akka.actor.{ ActorRef, Props }
@@ -41,7 +43,20 @@ object _02_Actors_answering {
   customer ! CaffeineWithdrawalWarning
 
   println("Coffee requested, thread: " + Thread.currentThread().getId())
-  barista ! ClosingTime
 
+  // asking
+  import akka.pattern.ask
+  import akka.util.Timeout
+  import scala.concurrent.duration._
+  import scala.concurrent.Future
+  
+  implicit val timeout = Timeout(2.second)
+  implicit val ec = system.dispatcher
+
+	val f:Future[Any] = barista ? ColombianRequest
+	f.onSuccess{
+		case Bill(cents) => println(s"I need to pay $cents for the coffee, thread: " + Thread.currentThread().getId())
+	}
+	
+  barista ! ClosingTime
   Thread.sleep(2000)
-}
