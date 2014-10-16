@@ -15,13 +15,17 @@ object _02_Actors_answering_asking {
   case class Bill(cent: Int)
 
   class Barista extends Actor {
+    var capuccinoCount = 0
+    var colombianCount = 0
     def receive = {
       case CapuccinoRequest =>
         sender ! Bill(250)
-        println("I have to prepare capuccino, thread: " + Thread.currentThread().getId())
+        capuccinoCount  += 1
+        println(s"I have to prepare capuccino, counter $capuccinoCount , thread: " + Thread.currentThread().getId())
       case ColombianRequest =>
         sender ! Bill(300)
-        println("Let's prepare a Colombian coffee, thread: " + Thread.currentThread().getId())
+        colombianCount += 1
+        println(s"Let's prepare a Colombian coffee, counter $colombianCount, thread: " + Thread.currentThread().getId())
       case ClosingTime =>
         println("Shutting down..., thread: " + Thread.currentThread().getId())
         context.system.shutdown()
@@ -59,4 +63,6 @@ object _02_Actors_answering_asking {
 	}
 	
   barista ! ClosingTime
+	println("Thread: " + Thread.currentThread().getId())
   Thread.sleep(2000)
+  }
