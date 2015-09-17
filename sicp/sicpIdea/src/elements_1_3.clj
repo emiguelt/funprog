@@ -1,4 +1,4 @@
-(ns elements)
+(ns elements_1_3)
 (defn square [x] (* x x))
 (defn square_sum [x y] (+ (square x) (square y)))
 (defn square_sum_larger [a b c]
