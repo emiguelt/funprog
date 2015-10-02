@@ -53,3 +53,22 @@
 
 (count-change 100)
 ;292
+
+;;;;;;;;;;;;;;;;
+;;; Exercise 1.11
+
+(define (f n)
+     (define (sum a b c) (+ a (* 2 b) (* 3 c)))
+     (define (iterf a b c n)
+          (cond ((< n 3) (sum a b c))
+                (else (iterf (sum a b c) a b (- n 1)))))
+     (cond ((< n 3) n)
+           (else (iterf 2 1 0 (- n 1)))))
+
+
+(f 1)
+(f 2)
+(f 3)
+(f 4)
+(f 5)
+(f 6)
