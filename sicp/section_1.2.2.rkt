@@ -72,3 +72,24 @@
 (f 4)
 (f 5)
 (f 6)
+
+;;;;;;;;;;;;;;;;
+;;; Exercise 1.12 Pascal (modified)
+;;; 1
+;;; 1 1
+;;; 1 2 1
+;;; 1 3 3 1
+;;; 1 4 6 4 1
+
+(define (pascal x y)
+  (cond ((= x 0) 1)
+        ((and (= y 0) (= x 0) 1))
+        (else (pascal (dec x)(dec y) )
+              (pascal x (dec y)))))
+
+(pascal 0 0)
+(pascal 0 1)
+(pascal 1 2)
+(pascal 2 3)
+(pascal 3 4)
+
