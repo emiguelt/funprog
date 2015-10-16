@@ -23,6 +23,23 @@
 	(else (*b (fast-expt b (- n 1))))))
 
 ;; Exercise 1.16 Define an iterative algorithm for fast-expt
+(define (fast-exptit b n)
+  (define (fast-expt-iter b n p)
+    (cond ((= n 0) p)
+          ((even? n) (fast-expt-iter (* b b) (/ n 2 ) p))
+          (else (fast-expt-iter b (- n 1) (* b p)))))
+  (fast-expt-iter b n 1))
+
+(fast-exptit 2 0)
+(fast-exptit 2 1)
+(fast-exptit 2 2)
+(fast-exptit 2 3)
+
+
+(fast-exptit 5 0)
+(fast-exptit 5 1)
+(fast-exptit 5 2)
+(fast-exptit 5 3)
 
 ;; Exercise 1.17 Use a similar algorithm of fast-expt for multiplication using repeated additions
 
