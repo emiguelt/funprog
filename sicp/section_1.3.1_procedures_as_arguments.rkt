@@ -39,8 +39,9 @@
 (sum-cubes2 1 5)
 
 ; integral
+
 (define (integral f a b dx)
-  (define (add-dx x) (+ x dx))
+  (define (add-dx x) (* x dx))
   (* (sum f (+ a (/ dx 2.0)) add-dx b) dx))
 
 (integral cube 0 1 0.01)
@@ -49,19 +50,13 @@
 
 (define (integral-simp f a b n)
   (define (h) (/ (- b a) n))
-  (define (y k) (* (factor k) (f (+ a (* k (h))))))
-  (define (factor k) 
-    (cond ((or (= k 0) (= k n)) 1)
-          ((= (remainder k 2) 0) 2)
-          (else 4))
-    )
+  (define (y k) (* (yn k) (f (+ a (* k (h))))))
+  (define (yn i) (if (= (remainder i 2) 0) 2 4))
   (* (/ (h) 3.0) (sum y 0 inc n)))
 
 (integral-simp cube 0 1 100)
 (integral-simp cube 0 1 1000)
 (integral-simp cube 0 1 10000)
-(integral-simp cube 0 1 1000000)
-
 
 ; Exercise 1.30
 
