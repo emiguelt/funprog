@@ -43,3 +43,11 @@
 (print-rat (mul-rat one-half one-third))
 (print-rat (div-rat one-half one-third))
 
+; Excercise 2.1 Support negative rationals in representation
+
+(define (make-rat n d)
+  (if (or (< n 0) (< d 0))
+    (cons (- (abs n)) (abs d))
+    (cons n d)))
+
+
