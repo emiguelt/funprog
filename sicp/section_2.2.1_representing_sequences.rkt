@@ -69,3 +69,26 @@
 (display listD)
 (last-pair listD)
 
+; Mapping over lists
+(define (map proc items)
+  (if (null? items)
+    nil
+    (cons (proc (car items))
+          (map proc (cdr items)))))
+
+(display (map (lambda (x) (+ x 1)) (list 1 2 3 4)))
+
+; Exercise 2.21
+(define (square-list items)
+  (map (lambda (x) (* x x)) items))
+
+(display (square-list (list 1 2 3 4)))
+
+; For-each
+(define (for-each proc items)
+  (cond ((not (null? items))
+         (proc (car items))
+         (for-each proc (cdr items)))))
+
+(for-each (lambda (x) (display x)) (list 1 2 3 4))
+
