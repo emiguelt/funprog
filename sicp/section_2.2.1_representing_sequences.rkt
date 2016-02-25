@@ -57,4 +57,15 @@
 (display listC)
 (last-pair listC)
 
+; 2.18, v2 - iterative
+(define (reverse2 items)
+  (define (reverse-iter l1 revList)
+    (if (null? l1)
+      revList
+      (reverse-iter (cdr l1) (cons (car l1) revList))))
+  (reverse-iter items nil))
+
+(define listD (reverse2 (list 1 2 3 4)))
+(display listD)
+(last-pair listD)
 
