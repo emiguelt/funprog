@@ -23,4 +23,13 @@
 (define x (list (list 1 2) (list 3 4)))
 (count-leaves x)
 
+; Exercise 2.18 - Fringe method (return the leaves a a list)
+
+(define (fringe list1)
+  (cond ((null? list1) nil)
+        ((not (pair? list1)) (cons list1 nil))
+        (else (append (fringe (car list1)) (fringe (cdr list1))))))
+
+(define x (list (list 1 2) (list 3 4)))
+(fringe x)
 
