@@ -55,3 +55,25 @@
 (->> (range 10) (map inc) (interpose 5) (reduce +))
 
 ; the result of a previous expression is passed as argument for the current expression.
+
+; CODE STRUCTURE
+; In clojure procedures are made by chaining functions together and piping input through them, or using the ->> macro to flat the procedure.
+
+; Destructuring
+; access values in data structures declaratively, also can be use in list, maps, etc.
+
+(let [[smaller bigger] (split-with #(< % 5) (range 10))]
+  (println smaller bigger))
+
+; var args use [& args] notation
+(defn print-args [& args]
+
+; Namespaces
+; used to create families of functions
+ (ns colors)
+ ..
+ def functions..
+ ..
+
+ ;; functions in same namespace are accessible directly, externally must be used
+ ; use keyword
