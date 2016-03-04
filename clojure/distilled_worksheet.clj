@@ -122,3 +122,26 @@
   (.baz b)
   (.baz b "baz with param"))
 
+; Dealing with Global State
+;; Atom: Used when uncoordinated updates are needed
+(def global-val (atom nil)) ; <-- define an atom called global val.
+
+(println (deref global-val)) ;<-- access the atom
+(println @global-val) ;<-- shortcut accessor
+
+(reset! global-val 10) ;<-- udpate value
+(println @global-val)
+
+(swap! global-val inc) ;<-- update value with function
+(println @global-val)
+
+;; Ref: Multiple updates as a transaction need to be done
+
+(def names (ref []))
+
+(dosync
+  (ref-set names ["john"])
+  (alter names #(if (not-empty %)
+                  (conj % "jane") %)))
+
+
