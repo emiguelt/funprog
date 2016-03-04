@@ -159,3 +159,22 @@
 
 (macroexpand-1 '(defprivate foo [greeting] (println greeting)))
 
+; Calling out to Java
+; Importing classes
+(:import java.io.File)
+(:import java.io File FileInputStream FileOutputStream) ;<-- import many at same time
+
+; instantiating classes (both equivalents):
+(new File ".")
+(File. ".") 
+
+; calling methods
+(let [f (File. ".")]
+  (println (.getAsolutePath f))) ;<-- access non-static method
+
+(str File/separator "foo" File/separator "bar") ;<-- access static method
+
+(.getBytes (.getAbsolutePath (File. "."))) ;<-- access nested methods, same than:
+(.. (File. ".") getAbsolutePath getBytes)
+
+
