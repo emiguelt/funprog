@@ -145,3 +145,17 @@
                   (conj % "jane") %)))
 
 
+; Clojure macro system
+;; For code templating
+(defmacro defprivate [name args & body]
+  `(defn ~(symbol name) ~args
+     (if (:user @session)
+       (do ~@body)
+       "please log in")))
+
+;;; ~ : used to evaluate the parameter (unquoting)
+;;; ~@ : (unquote splicing) used when dealing with a sequence
+;;; ` : treat the followind list as data instead of executing it (syntax quoting)
+
+(macroexpand-1 '(defprivate foo [greeting] (println greeting)))
+
