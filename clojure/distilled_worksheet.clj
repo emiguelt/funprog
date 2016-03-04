@@ -75,5 +75,50 @@
  def functions..
  ..
 
- ;; functions in same namespace are accessible directly, externally must be used
- ; use keyword
+;; functions in same namespace are accessible directly, externally must be used
+;;; * _use_ keyword: to make all its Vars implicitly available
+;;; * __require keyword: to access to Vars using the prefix. Can asign an alias with _as_.
+
+; POLYMORPHISM
+;; Multimethods: Provides a dispatching mechanism suing a selector function associated with one or more methods
+
+;;; example
+
+(defmulti area :shape) ;<-- define multimethod
+
+(defmethod area :circle [{:keys [r]}] ;<-- define implementation
+  (* Math/PI r r))
+
+(defmethod area :rectangle [{:keys [l w]}];-- define other implementation
+  (* l w))
+
+(defmethod area :default [shape]
+  (throw (Exception. (str "unreconized shape: " shape))))
+
+;;;; testing
+(area {:shape :circle :r 10})
+(area {:shape :rectangle :l 5 :w 10})
+
+;; Protocols: Allow defining an abstract set of functions that can be implemented by a concrete type
+
+;;; example
+(defprotocol Foo  ;<-- define de interface
+  "Foo doc string"
+  (bar [this b] "bar doc string")
+  (baz [this][this b] "baz doc string"))
+
+
+(deftype Bar [data] Foo ;<-- implements Foo
+  (bar [this param]
+    (println data param))
+  (baz [this]
+    (println (class this)))
+  (baz [this param]
+    (println param)))
+
+;;;; testing
+(let [b (Bar. "some data")]
+  (.bar b "param")
+  (.baz b)
+  (.baz b "baz with param"))
+
