@@ -14,7 +14,8 @@
                  [ring/ring-json "0.3.1"]
                  [cheshire "5.1.1"]]
   :plugins [[lein-environ "1.0.2"]
-            [lein-gen "0.2.2"]]
+            [lein-gen "0.2.2"]
+            [lein-figwheel "0.3.9"]]
   :generators [[duct/generators "0.5.8"]]
   :duct {:ns-prefix clojure-web-app}
   :main ^:skip-aot clojure-web-app.main
@@ -35,4 +36,11 @@
                    :source-paths ["dev"]
                    :repl-options {:init-ns user}
                    :env {:port 3000}}
-   :project/test  {}})
+   :project/test  {}}
+  :cljsbuild 
+  {:builds [{:id "dev"
+             :source-paths ["src-cljs"] :figwheel true :compiler {:main "clojure-web-app.core"
+                        :asset-path "js/out"
+                        :output-to "resources/public/js/clojure-web-app.js"
+                        :output-dir "resources/public/js/out"}}]}
+  )
