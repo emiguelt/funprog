@@ -14,7 +14,7 @@
                  [ring/ring-json "0.3.1"]
                  [cheshire "5.1.1"]
                  [org.danielsz/system "0.1.9"]
-                 [com.novemberrain/monger "2.0.0"]]
+                 [com.novemberain/monger "2.0.0"]]
   :plugins [[lein-environ "1.0.2"]
             [lein-gen "0.2.2"]
             [lein-figwheel "0.3.9"]]
