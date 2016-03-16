@@ -1,3 +1,10 @@
-(ns ^:figwheel-always clojure-web-app.core)
+(ns ^:figwheel-always clojure-web-app.core
+  (:require [cljs-http.client :as http]
+            [cljs.core.async :refer [<! >! chan]]))
 (enable-console-print!)
-(println "hello from clojure script, figwheel rocks!")
+
+(go
+  (let [response (<! (http/get "contacts"))]
+    (println (:body response))))
+
+(println "hello from clojure script, figwheel rocks!!")
