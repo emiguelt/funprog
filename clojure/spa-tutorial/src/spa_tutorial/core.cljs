@@ -1,6 +1,10 @@
 (ns spa-tutorial.core
-  (:require [om.core :as om]
-            [om.dom :as dom]))
+  (:require [om.core :as om :include-macros true]
+            [om.dom :as dom :include-macros true]
+            [om-tools.core :refer-macros [defcomponent]]
+            [secretary.core :as sec :include-macros true]
+            [goog.events :as events]
+            [goog.history.EventType :as EventType]))
 
 (enable-console-print!)
 
