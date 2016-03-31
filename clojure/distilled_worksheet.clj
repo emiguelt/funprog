@@ -75,10 +75,14 @@
  def functions..
  ..
 
+;; Usually each file corresponds to one namespace identified by the file's path
+
 ;; functions in same namespace are accessible directly, externally must be used
+
 ;;; * _use_ keyword: to make all its Vars implicitly available
 ;;; * __require keyword: to access to Vars using the prefix. Can asign an alias with _as_.
 
+;; WARN: If a namespace name has an hyphen, the corresponding file name should have and underscore
 ; POLYMORPHISM
 ;; Multimethods: Provides a dispatching mechanism suing a selector function associated with one or more methods
 
