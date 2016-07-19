@@ -42,7 +42,7 @@ function() {
     .filter(function(video){
       return video.rating===5.0;})
     .map(function(video){
-      return video.id;0}); // Complete this expression
+      return video.id;}); // Complete this expression
 	// ------------ INSERT CODE HERE! -----------------------------------
 }
 		
