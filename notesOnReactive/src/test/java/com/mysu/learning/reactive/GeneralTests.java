@@ -6,6 +6,8 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import reactor.core.publisher.Flux;
 
+import java.util.function.Consumer;
+
 /**
  * Created by EdwinT on 16/11/2016.
  */
@@ -48,6 +50,14 @@ public class GeneralTests {
                         System.out.println("Finalized");
                     }
                 });
+    }
+
+    @Test
+    public void testBatching(){
+        makeBasicFlow()
+                .log()
+                .map(String::toUpperCase)
+                .subscribe(s -> System.out.println("Accepted: " + s), 2);
     }
 
     private Flux<String> makeBasicFlow() {
