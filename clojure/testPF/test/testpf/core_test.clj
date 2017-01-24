@@ -11,3 +11,14 @@
 (deftest testFalseOneLeftParenthesis
   (testing "Is false when only one left parenthesis"
            (is (not (checkparenthesis "(")))))
+
+(deftest testFalseOneRigthParenthesis
+  (testing "Is false when only one rigth parenthesis"
+           (is (not (checkparenthesis ")")))))
+
+(deftest testTrueBalancedPairs
+  (testing "Is true in balanced pairs"
+           (is (checkparenthesis "()"))
+           (is (checkparenthesis "(())"))
+           (is (checkparenthesis "(a(b))"))
+           ))

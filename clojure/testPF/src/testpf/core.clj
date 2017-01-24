@@ -1,9 +1,17 @@
-(ns testpf.core)
+(ns testpf.core
+  (:require [clojure.string :refer :all]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
-
-(defn checkparenthesis [str]
-  true)
+(defn checkparenthesis [strg]
+ (defn getvalue [c]
+    (case c
+      "(" 1
+      ")" -1
+      0))   
+ (defn checkpar [acum strg]
+   (if (blank? strg)
+     (= 0 acum)
+     (checkpar 
+       (+ (getvalue (str (get strg 0))) acum) 
+       (subs strg 1))))
+ (checkpar 0 strg)
+)
