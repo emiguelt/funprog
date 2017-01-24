@@ -22,3 +22,7 @@
            (is (checkparenthesis "(())"))
            (is (checkparenthesis "(a(b))"))
            ))
+
+(deftest testReversePair
+  (testing "Is false when first close then open"
+           (is (not (checkparenthesis ")(")))))

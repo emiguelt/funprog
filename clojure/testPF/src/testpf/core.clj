@@ -8,10 +8,11 @@
       ")" -1
       0))   
  (defn checkpar [acum strg]
-   (if (blank? strg)
-     (= 0 acum)
-     (checkpar 
-       (+ (getvalue (str (get strg 0))) acum) 
-       (subs strg 1))))
+   (cond
+     (< acum 0 ) false
+     (blank? strg) (= 0 acum)
+     :else (checkpar 
+             (+ (getvalue (str (get strg 0))) acum) 
+             (subs strg 1))))
  (checkpar 0 strg)
 )
