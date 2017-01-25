@@ -11,7 +11,7 @@
    (cond
      (< acum 0 ) false
      (blank? strg) (= 0 acum)
-     :else (checkpar 
+     :else (recur 
              (+ (getvalue (str (get strg 0))) acum) 
              (subs strg 1))))
  (checkpar 0 strg)

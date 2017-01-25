@@ -26,3 +26,8 @@
 (deftest testReversePair
   (testing "Is false when first close then open"
            (is (not (checkparenthesis ")(")))))
+
+(deftest tests
+  (testing "teacher tests"
+    (is (checkparenthesis "((1+2) + 4)"))
+    (is (not (checkparenthesis "(1+2")))))
