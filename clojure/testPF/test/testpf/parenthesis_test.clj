@@ -1,6 +1,6 @@
-(ns testpf.core-test
+(ns testpf.parenthesis-test
   (:require [clojure.test :refer :all]
-            [testpf.core :refer :all]))
+            [testpf.parenthesis :refer :all]))
 
 (deftest testEmptyString
   (testing "Test return true when empty string"

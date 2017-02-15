@@ -1,4 +1,4 @@
-(ns testpf.core
+(ns testpf.parenthesis
   (:require [clojure.string :refer :all]))
 
 (defn parenthesisBalanced [strg]
