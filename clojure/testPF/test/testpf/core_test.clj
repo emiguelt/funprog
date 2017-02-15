@@ -4,30 +4,30 @@
 
 (deftest testEmptyString
   (testing "Test return true when empty string"
-           (is (checkparenthesis nil))
-           (is (checkparenthesis ""))
+           (is (parenthesisBalanced nil))
+           (is (parenthesisBalanced ""))
           ))
 
 (deftest testFalseOneLeftParenthesis
   (testing "Is false when only one left parenthesis"
-           (is (not (checkparenthesis "(")))))
+           (is (not (parenthesisBalanced "(")))))
 
 (deftest testFalseOneRigthParenthesis
   (testing "Is false when only one rigth parenthesis"
-           (is (not (checkparenthesis ")")))))
+           (is (not (parenthesisBalanced ")")))))
 
 (deftest testTrueBalancedPairs
   (testing "Is true in balanced pairs"
-           (is (checkparenthesis "()"))
-           (is (checkparenthesis "(())"))
-           (is (checkparenthesis "(a(b))"))
+           (is (parenthesisBalanced "()"))
+           (is (parenthesisBalanced "(())"))
+           (is (parenthesisBalanced "(a(b))"))
            ))
 
 (deftest testReversePair
   (testing "Is false when first close then open"
-           (is (not (checkparenthesis ")(")))))
+           (is (not (parenthesisBalanced ")(")))))
 
 (deftest tests
   (testing "teacher tests"
-    (is (checkparenthesis "((1+2) + 4)"))
-    (is (not (checkparenthesis "(1+2")))))
+    (is (parenthesisBalanced "((1+2) + 4)"))
+    (is (not (parenthesisBalanced "(1+2")))))

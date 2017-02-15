@@ -1,7 +1,7 @@
 (ns testpf.core
   (:require [clojure.string :refer :all]))
 
-(defn checkparenthesis [strg]
+(defn parenthesisBalanced [strg]
  (defn getvalue [c]
     (case c
       "(" 1
