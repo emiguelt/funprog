@@ -7,7 +7,7 @@
    [ring/ring-core "1.5.1"]
    [ring/ring-devel "1.5.1"]
    [ring/ring-jetty-adapter "1.5.1"]
-   [compojure/compojure "1.5.2"]
+   [compojure "1.5.2"]
    [hiccup/hiccup "1.0.5"]]
   :dev-dependencies
   [[lein-run/lein-run "1.0.0"]]
