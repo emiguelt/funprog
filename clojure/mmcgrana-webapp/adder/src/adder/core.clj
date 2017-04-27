@@ -5,7 +5,8 @@
     hiccup.page
     ring.middleware.reload
     ring.middleware.stacktrace
-    ring.util.response)
+    ring.util.response
+    adder.middleware)
   (:require
     [compojure.handler :as handler]
     [ring.adapter.jetty :as jetty]))
@@ -48,9 +49,11 @@
         (view-input a b))))
   (ANY "/*" [path] (redirect "/")))
 
-(def app (wrap-reload (wrap-stacktrace
-           (handler/site theroutes) 
-           )))
+(def app (wrap-stacktrace
+           (wrap-reload
+             (wrap-request-logging 
+               (handler/site theroutes) 
+               ))))
 
 (defn -main []
   (let [port (Integer/parseInt (or (System/getenv "PORT") "8080"))]
