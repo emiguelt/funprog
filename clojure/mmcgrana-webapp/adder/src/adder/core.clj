@@ -41,7 +41,7 @@
 (defn parse-input [a b]
   [(Integer/parseInt a) (Integer/parseInt b)])
 
-(defroutes theroutes
+(defroutes handler
   (GET "/" [] (view-input))
   (POST "/" [a b]
     (try
@@ -52,7 +52,7 @@
         (view-input a b))))
   (ANY "/*" [path] (redirect "/")))
 
-(def app (-> #'theroutes
+(def app (-> #'handler
              (wrap-file "public")
              (wrap-file-info)
              (wrap-request-logging)
