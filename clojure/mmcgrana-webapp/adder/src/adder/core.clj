@@ -3,6 +3,8 @@
     compojure.core
     hiccup.core
     hiccup.page
+    ring.middleware.file
+    ring.middleware.file-info
     ring.middleware.reload
     ring.middleware.stacktrace
     ring.util.response
@@ -17,7 +19,8 @@
        [:meta {:http-equiv "Content-type"
                :content "text/html; charset=utf-8"}]
        [:title "adder"]
-      [:body content]]))
+       [:link {:href "/adder.css" :rel "stylesheed" :type "text/css"}]]
+    [:body content]))
 
 (defn view-input [& [a b]]
   (view-layout
@@ -49,11 +52,14 @@
         (view-input a b))))
   (ANY "/*" [path] (redirect "/")))
 
-(def app (wrap-stacktrace
-           (wrap-reload
-             (wrap-request-logging 
-               (handler/site theroutes) 
-               ))))
+(def app (-> #'theroutes
+             (wrap-file "public")
+             (wrap-file-info)
+             (wrap-request-logging)
+             (wrap-reload)
+             (wrap-bounce-favicon)
+             (wrap-stacktrace)
+             (handler/site)))
 
 (defn -main []
   (let [port (Integer/parseInt (or (System/getenv "PORT") "8080"))]
