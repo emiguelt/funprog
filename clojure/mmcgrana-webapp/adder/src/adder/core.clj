@@ -41,6 +41,12 @@
 (defn parse-input [a b]
   [(Integer/parseInt a) (Integer/parseInt b)])
 
+(def production?
+  (= "production" (get (System/getenv) "APP_ENV")))
+
+(def development?
+     (not production?))
+
 (defroutes handler
   (GET "/" [] (view-input))
   (POST "/" [a b]
@@ -56,10 +62,12 @@
              (wrap-file "public")
              (wrap-file-info)
              (wrap-request-logging)
-             (wrap-reload)
+             (wrap-if development? wrap-reload)
              (wrap-bounce-favicon)
-             (wrap-stacktrace)
-             (handler/site)))
+             (wrap-exception-logging)
+             (handler/site)
+             (wrap-if production? wrap-failsafe)
+             (wrap-if development? wrap-stacktrace)))
 
 (defn -main []
   (let [port (Integer/parseInt (or (System/getenv "PORT") "8080"))]
