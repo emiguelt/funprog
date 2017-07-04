@@ -12,7 +12,7 @@
         author (str "<span class=\"author\">" (.-author msg) "</span>: ")]
     (.append history (str "<li" author (.-msg msg) t "</li>"))))
 
-(def conn (js/WebSocket. "ws://127.0.0.1/9899/ws"))
+(def conn (js/WebSocket. "ws://localhost:9090/ws"))
 
 (set! (.-onopen conn)
   (fn [e]

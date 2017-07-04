@@ -32,9 +32,9 @@
                 (let [all-msgs* (conj @all-msgs data)
                       total (count all-msgs*)]
                   (if (> total 100)
-                    (ref-set all-msgs (vec (drop (-total 100) all-msgs*)))
+                    (ref-set all-msgs (vec (drop (- total 100) all-msgs*)))
                     (ref-set all-msgs all-msgs*))))))
-    (doseq [client (keys @cllients)]
+    (doseq [client (keys @clients)]
       (send! client (json-str @all-msgs)))))
 
 (defn chat-handler [req]
