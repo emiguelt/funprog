@@ -51,5 +51,27 @@ object Ch03_Functional_Data_Structures {
       case Cons(_, Nil) => Nil
       case Cons(x, xs) => Cons(x, init(xs))
     }
+
+    def foldRight[A,B] (as: List[A], z: B)(f: (A,B)=>B):B =
+      as match {
+        case Nil => z
+        case Cons(x, xs) => f(x, foldRight(xs, z)(f))
+      }
+
+    def length[A](as: List[A]): Int =
+      foldRight(as, 0)((_,b) => b + 1)
+
+    def foldLeft[A,B](as: List[A], z: B)(f: (B, A) => B): B =
+      as match {
+        case Nil => z
+        case Cons(x, xs) => foldLeft(xs, f(z,x))(f)
+      }
+
+    def sumL(ints: List[Int]): Int =
+      foldLeft(ints, 0)((a,b) => a + b)
+    def productL(ints: List[Int]): Int =
+    foldLeft(ints, 1)((a,b) => a * b)
+    def lengthL[A](as: List[A]): Int =
+      foldLeft(as, 0)((a,b) => a + 1)
   }
 }

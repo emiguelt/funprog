@@ -39,4 +39,25 @@ class Ch03_Functional_Data_Structures_Test extends FreeSpec{
   "Ex 3.6 init function"  in {
     assert(init(List(1,2,3,4)) == List(1,2,3))
   }
+
+  "Ex 3.9 length of a list using foldRight"  in {
+    assert(length(Nil) == 0)
+    assert(length(List(1,2,3)) == 3)
+  }
+
+  "Ex 3.10 foldLeft" in {
+    assert(foldLeft(Nil:List[Int], 0)((a,b)=> a + b) == 0)
+    assert(foldLeft(List(1,2,3), 0)((a,b)=> a + b) == 6)
+  }
+
+  "Ex. 3.11 sum, product and length using foldLeft" in{
+    assert(sumL(Nil) == 0)
+    assert(sum(List(1,2,3)) == 6)
+
+    assert(productL(Nil) == 1)
+    assert(productL(List(2,2,3)) == 12)
+
+    assert(lengthL(Nil) == 0)
+    assert(lengthL(List(2,2,3)) == 3)
+  }
 }
