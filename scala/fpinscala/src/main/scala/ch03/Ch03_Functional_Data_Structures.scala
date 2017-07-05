@@ -64,14 +64,19 @@ object Ch03_Functional_Data_Structures {
     def foldLeft[A,B](as: List[A], z: B)(f: (B, A) => B): B =
       as match {
         case Nil => z
-        case Cons(x, xs) => foldLeft(xs, f(z,x))(f)
+        case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
       }
 
     def sumL(ints: List[Int]): Int =
       foldLeft(ints, 0)((a,b) => a + b)
+
     def productL(ints: List[Int]): Int =
     foldLeft(ints, 1)((a,b) => a * b)
+
     def lengthL[A](as: List[A]): Int =
       foldLeft(as, 0)((a,b) => a + 1)
+
+    def reverse[A](as: List[A]): List[A]=
+      foldLeft(as, Nil:List[A])((b,a) => Cons(a,b))
   }
 }

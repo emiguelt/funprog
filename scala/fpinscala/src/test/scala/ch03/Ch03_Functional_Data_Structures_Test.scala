@@ -60,4 +60,9 @@ class Ch03_Functional_Data_Structures_Test extends FreeSpec{
     assert(lengthL(Nil) == 0)
     assert(lengthL(List(2,2,3)) == 3)
   }
+
+  "Ex. 3.12 reverse a list using fold" in {
+    assert(reverse(Nil:List[Int]) == Nil)
+    assert(reverse(List(1,2,3)) == List(3,2,1))
+  }
 }
