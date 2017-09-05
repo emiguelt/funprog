@@ -30,8 +30,8 @@
                           {:a 1 :b 2})))
     )
   (testing "map using reduce"
-    (is (= '(1 2) (reduce (fn [seq_ value] (cons (inc value) seq_))
+    (is (= '(1 2) (reduce (fn [seq_ value] (concat seq_ [(inc value)]))
                           '()
-                          (reverse '(0 1)))))
+                          '(0 1))))
     )
   )
