@@ -30,3 +30,20 @@
   (filter #(>= (:glitter-index %) minimum-glitter) records))
 
 
+(defn namelist "Ex 1 Turn the glitter result to a list of names"
+  [fulllist]
+
+  (map #(get % :name) fulllist)) 
+
+(defn append "Ex 2 append a suspect to list"
+  [the-list newone]
+  (if (empty? the-list) 
+    (cons newone nil)
+    (cons 
+      (first the-list) 
+      (append (rest the-list) newone))))
+
+
+;(defn validate "Ex 3 add validation to append"
+;  [keys-to-validate record]
+;  (
