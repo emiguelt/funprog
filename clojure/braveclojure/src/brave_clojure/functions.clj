@@ -44,6 +44,13 @@
       (append (rest the-list) newone))))
 
 
-;(defn validate "Ex 3 add validation to append"
-;  [keys-to-validate record]
-;  (
+(defn validate "Ex 3 add validation to append"
+  [keys-to-validate record]
+  (not (some (fn [the-key] (not (contains? record the-key)))
+        keys-to-validate)))
+
+(defn append-with-validate "ex 3"
+  [the-list newone]
+  (if (validate (keys conversions) newone)
+    (append the-list newone)
+    the-list))
