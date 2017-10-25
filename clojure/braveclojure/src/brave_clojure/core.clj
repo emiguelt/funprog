@@ -2,7 +2,7 @@
   (:use brave-clojure.functions)
   )
 
-(defn say-hello [] (str "hello"))
+(defn say-hello [] (println "hello"))
 
 (def commands {"hello" say-hello})
 
@@ -14,6 +14,6 @@
     (if (not (nil? cmd))
       (do
         (println "Executing " cmd-name)
-        (println (cmd))
+        (cmd)
         )
       (println "Nothing to execute"))))
