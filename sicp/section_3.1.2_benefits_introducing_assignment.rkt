@@ -22,3 +22,17 @@
 
 (estimate-pi 2)
 
+;; Exercise 3.6 Random with reset
+(define rand-init 1)
+(define (rand-update x) (+ x 1));; <--- not as random as expected, but useful
+
+(define rand-3.6
+  (let ((x rand-init))
+    (let ((rand (lambda ()
+                (set! x (rand-update x) )
+                x)))
+      (define (dispatch param)
+        (cond ((eq? param 'reset) (lambda (new-value) (set! x new-value)))
+              ((eq? param 'generate) (rand))))
+      dispatch)))
+
