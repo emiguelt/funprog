@@ -1,4 +1,4 @@
-(ns clojure-beginner.Exceptions)
+(ns clojure-beginner._07_Exceptions)
 
 (defn someFun [x]
   (try

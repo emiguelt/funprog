@@ -1,4 +1,4 @@
-(ns clojure-beginner.Conditionals)
+(ns clojure-beginner._01_Conditionals)
 
 ;; Basic IF
 (defn simple-if [x]

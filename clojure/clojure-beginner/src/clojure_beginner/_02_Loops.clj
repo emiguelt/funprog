@@ -1,4 +1,4 @@
-(ns clojure-beginner.Loops)
+(ns clojure-beginner._02_Loops)
 
 ;; loop like a for(int i = =0; i<10;i++)
 (defn the-loop [x]

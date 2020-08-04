@@ -1,4 +1,4 @@
-(ns clojure-beginner.StructMaps)
+(ns clojure-beginner._04_StructMaps)
 
 ;; StructMaps constructors
 

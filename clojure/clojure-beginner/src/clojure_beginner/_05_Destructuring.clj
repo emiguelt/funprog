@@ -1,4 +1,4 @@
-(ns clojure-beginner.Destructuring)
+(ns clojure-beginner._05_Destructuring)
 
 ;; Split complex data type in simple ones
 

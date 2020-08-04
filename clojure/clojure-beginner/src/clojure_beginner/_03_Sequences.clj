@@ -1,4 +1,4 @@
-(ns clojure-beginner.Sequences)
+(ns clojure-beginner._03_Sequences)
 
 ;; Create a sequence
 (def someSeq (seq ["a" "b" "c"]))
