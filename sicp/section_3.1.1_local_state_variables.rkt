@@ -94,3 +94,36 @@
 (s 'how-many-calls?)
 (s 'reset-count)
 
+
+;; Exercise 3.3 Bank account with password
+(define (make-account-pwd amount pass-account)
+  (define account (make-account amount))
+  (lambda (pass operation)
+    (cond ((eq? pass-account pass) (account operation))
+          (else (lambda (x) "Incorrect password")))))
+
+(define acc (make-account-pwd 100 'my-pass))
+
+((acc 'my-pass 'withdraw) 10)
+
+((acc 'my-pass 'withdraw) 1000)
+
+((acc 'other-passs 'withdraw) 10)
+
+;; Exercise 3.7 Joint account with two passwords
+(define (make-joint account pass-account pass-joint)
+  (lambda (pass operation)
+    (cond ((eq? pass pass-joint) (account pass-account operation))
+          (else (account pass operation)))))
+
+(define acc (make-account-pwd 100 'my-pass))
+
+(define joint-acc (make-joint acc 'my-pass 'pass2))
+
+((joint-acc 'my-pass 'withdraw) 10)
+
+((joint-acc 'pass2 'withdraw) 10)
+
+((joint-acc 'other-passs 'withdraw) 10)
+
+
